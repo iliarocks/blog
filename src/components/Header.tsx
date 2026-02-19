@@ -12,19 +12,16 @@ function Header({
 			<nav>
 				<ul className="flex flex-col gap-2 text-[var(--secondary)]">
 					<li>
-						<Link href="/Camera">Camera</Link>
+						<Link href="/code">Code</Link>
 					</li>
 					<li>
-						<Link href="/Code">Code</Link>
+						<Link href="/writing">Writing</Link>
+					</li>
+					<li>
+						<Link href="/camera">Camera</Link>
 					</li>
 					<li>
 						<Link href="/library">Library</Link>
-					</li>
-					<li>
-						<Link href="/Writing">Writing</Link>
-					</li>
-					<li>
-						<Link href="/Other">Other</Link>
 					</li>
 				</ul>
 			</nav>

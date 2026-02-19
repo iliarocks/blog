@@ -3,6 +3,9 @@
 import { i } from "@instantdb/react";
 
 const _schema = i.schema({
+  // We inferred 6 attributes!
+  // Take a look at this schema, and if everything looks good,
+  // run `push schema` again to enforce the types.
   entities: {
     $files: i.entity({
       path: i.string().unique().indexed(),
@@ -13,10 +16,30 @@ const _schema = i.schema({
       imageURL: i.string().optional(),
       type: i.string().optional(),
     }),
+    camera: i.entity({
+      alt: i.string(),
+      takenAt: i.string(),
+      type: i.string(),
+    }),
+    code: i.entity({
+      description: i.string().optional(),
+      name: i.string().optional(),
+      product: i.string().optional(),
+      repository: i.string().optional(),
+    }),
+    library: i.entity({
+      authors: i.any().optional(),
+      instalment: i.number().optional(),
+      rating: i.number().optional(),
+      release: i.string().optional(),
+      status: i.string().optional(),
+      title: i.string().optional(),
+      type: i.string().optional(),
+    }),
     todos: i.entity({
-      text: i.string(),
-      done: i.boolean(),
-      createdAt: i.number(),
+      createdAt: i.number().optional(),
+      done: i.boolean().optional(),
+      text: i.string().optional(),
     }),
   },
   links: {
@@ -31,6 +54,18 @@ const _schema = i.schema({
         on: "$users",
         has: "many",
         label: "linkedGuestUsers",
+      },
+    },
+    camera$files: {
+      forward: {
+        on: "camera",
+        has: "many",
+        label: "$files",
+      },
+      reverse: {
+        on: "$files",
+        has: "many",
+        label: "camera",
       },
     },
   },
