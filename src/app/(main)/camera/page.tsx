@@ -105,7 +105,7 @@ function Image({ image }: { image: Image }) {
 	return (
 		<img
 			className="min-h-0 min-w-0 max-h-full max-w-full object-contain"
-			src={image.$files[0].url}
+			src={image.$files?.url}
 			alt={image.alt}
 		/>
 	);
