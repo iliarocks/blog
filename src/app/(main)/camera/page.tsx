@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import schema from "@/instant.schema";
 import { db } from "@/library/db";
 import { InstaQLEntity } from "@instantdb/react";
+import { useWindowWidth } from "@react-hook/window-size";
 import { Masonry } from "masonic";
 import { useEffect, useState } from "react";
 
@@ -20,23 +21,20 @@ function Camera() {
 
 	const { camera } = data;
 
-	const sorted = [...camera].sort(
+	const sorted = camera.toSorted(
 		(a, b) => Date.parse(b.takenAt) - Date.parse(a.takenAt),
 	);
 
 	return (
 		<>
-			<Header>
-				<span className="text-[var(--primary)]">Camera</span>
-				<br />
-				<span className="text-[var(--secondary)]">My Lens</span>
-			</Header>
-			<main className="p-l h-screen overflow-scroll">
-				{activeIndex !== null && (
-					<ImageDialog images={sorted} selected={activeIndex} onSelect={setActiveIndex} />
-				)}
-				<CameraGrid images={sorted} onSelect={setActiveIndex} />
-			</main>
+			{activeIndex !== null && (
+				<ImageDialog
+					images={sorted}
+					selected={activeIndex}
+					onSelect={setActiveIndex}
+				/>
+			)}
+			<CameraGrid images={sorted} onSelect={setActiveIndex} />
 		</>
 	);
 }
@@ -48,6 +46,9 @@ function CameraGrid({
 	images: Image[];
 	onSelect: (index: number) => void;
 }) {
+	const width = useWindowWidth();
+	const columnWidth = width >= 1024 ? 350 : undefined;
+
 	const render = ({ data, index }: { data: Image; index: number }) => {
 		return (
 			<button onClick={() => onSelect(index)}>
@@ -56,7 +57,7 @@ function CameraGrid({
 		);
 	};
 
-	return <Masonry items={images} columnGutter={12} render={render} />;
+	return <Masonry items={images} columnGutter={12} columnWidth={columnWidth} render={render} />;
 }
 
 function ImageDialog({
@@ -84,7 +85,7 @@ function ImageDialog({
 					onSelect(Math.min(images.length - 1, selected + 1));
 					break;
 			}
-		}
+		};
 
 		window.addEventListener("keydown", onKeyDown);
 		return () => window.removeEventListener("keydown", onKeyDown);
@@ -93,7 +94,7 @@ function ImageDialog({
 	return (
 		<dialog
 			open
-			className="fixed z-1 inset-0 grid place-items-center p-l w-screen bg-[var(--background)]"
+			className="fixed z-1 inset-0 grid place-items-center p-s w-screen bg-[var(--background)]"
 			onClick={() => onSelect(null)}
 		>
 			<Image image={images[selected]} />
