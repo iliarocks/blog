@@ -102,11 +102,13 @@ function ImageDialog({
 }
 
 function Image({ image }: { image: Image }) {
+	const [loaded, setLoaded] = useState(false);
 	return (
 		<img
-			className="min-h-0 min-w-0 max-h-full max-w-full object-contain"
+			className={`min-h-0 min-w-0 max-h-full max-w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
 			src={image.$files?.url}
 			alt={image.alt}
+			onLoad={() => setLoaded(true)}
 		/>
 	);
 }
