@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
-	title: {
-		default: "Ilia",
-		template: "%s · Ilia",
-	},
+	title: "Ilia",
 	description: "Personal essays, projects, photos, and more",
 };
 

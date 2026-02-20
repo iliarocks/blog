@@ -3,13 +3,16 @@
 import { i } from "@instantdb/react";
 
 const _schema = i.schema({
-  // We inferred 6 attributes!
-  // Take a look at this schema, and if everything looks good,
-  // run `push schema` again to enforce the types.
   entities: {
     $files: i.entity({
       path: i.string().unique().indexed(),
       url: i.string(),
+    }),
+    $streams: i.entity({
+      abortReason: i.string().optional(),
+      clientId: i.string().unique().indexed(),
+      done: i.boolean().optional(),
+      size: i.number().optional(),
     }),
     $users: i.entity({
       email: i.string().unique().indexed().optional(),
@@ -19,7 +22,6 @@ const _schema = i.schema({
     camera: i.entity({
       alt: i.string(),
       takenAt: i.string(),
-      type: i.string(),
     }),
     code: i.entity({
       description: i.string().optional(),
@@ -28,13 +30,9 @@ const _schema = i.schema({
       repository: i.string().optional(),
     }),
     library: i.entity({
-      authors: i.any().optional(),
-      instalment: i.number().optional(),
-      rating: i.number().optional(),
-      release: i.string().optional(),
-      status: i.string().optional(),
-      title: i.string().optional(),
-      type: i.string().optional(),
+      authors: i.string(),
+      title: i.string(),
+      type: i.string(),
     }),
     todos: i.entity({
       createdAt: i.number().optional(),
@@ -43,6 +41,19 @@ const _schema = i.schema({
     }),
   },
   links: {
+    $streams$files: {
+      forward: {
+        on: "$streams",
+        has: "many",
+        label: "$files",
+      },
+      reverse: {
+        on: "$files",
+        has: "one",
+        label: "$stream",
+        onDelete: "cascade",
+      },
+    },
     $usersLinkedPrimaryUser: {
       forward: {
         on: "$users",
@@ -59,12 +70,13 @@ const _schema = i.schema({
     camera$files: {
       forward: {
         on: "camera",
-        has: "many",
+        has: "one",
         label: "$files",
+				onDelete: "cascade",
       },
       reverse: {
         on: "$files",
-        has: "many",
+        has: "one",
         label: "camera",
       },
     },

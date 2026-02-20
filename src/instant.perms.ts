@@ -7,6 +7,7 @@ const rules = {
     allow: {
       view: "true",
       create: "true",
+			delete: "true",
     },
   },
 } satisfies InstantRules;
