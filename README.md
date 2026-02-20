@@ -1,6 +1,6 @@
-# Welcome to your InstantDB NextJS app 👋
+# Ilia.is 👋
 
-This is a NextJS project scaffolded with create-instant-app.
+My personal blog build with NextJS and scaffolded with create-instant-app.
 
 To run the development server:
 `npm run dev`
@@ -11,5 +11,3 @@ To push schema changes:
 To pull schema changes:
 `npx instant-cli pull`
 
-
-Got any feedback or questions? Join our [Discord](https://discord.gg/hgVf9R6SBm)
