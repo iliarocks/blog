@@ -1,14 +1,7 @@
-'use client';
-
-import Header from '@/components/Header';
+"use client";
 
 function Home() {
-	return (
-		<Header>
-			<span className='text-[var(--primary)]'>Ilia Parunashvili</span><br />
-			<span className='text-[var(--secondary)]'>Student and Maker</span>
-		</Header>
-	);
+	return <span className="text-[var(--primary)]">Ilia Parunashvili</span>;
 }
 
 export default Home;

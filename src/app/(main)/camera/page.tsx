@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import schema from "@/instant.schema";
 import { db } from "@/library/db";
 import { InstaQLEntity } from "@instantdb/react";
