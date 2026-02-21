@@ -46,11 +46,12 @@ function CameraGrid({
 	onSelect: (index: number) => void;
 }) {
 	const width = useWindowWidth();
-	const columnWidth = width >= 1024 ? 350 : undefined;
+	const isDesktop = width >= 1023;
+	const columnWidth = isDesktop ? 350 : undefined;
 
 	const render = ({ data, index }: { data: Image; index: number }) => {
 		return (
-			<button onClick={() => onSelect(index)}>
+			<button onClick={() => isDesktop && onSelect(index)}>
 				<Image image={data} />
 			</button>
 		);
