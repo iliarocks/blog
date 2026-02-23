@@ -21,24 +21,18 @@ const _schema = i.schema({
     }),
     camera: i.entity({
       alt: i.string(),
-      takenAt: i.string(),
-    }),
-    code: i.entity({
-      description: i.string().optional(),
-      name: i.string().optional(),
-      product: i.string().optional(),
-      repository: i.string().optional(),
+      takenAt: i.date(),
     }),
     library: i.entity({
       authors: i.string(),
       title: i.string(),
       type: i.string(),
     }),
-    todos: i.entity({
-      createdAt: i.number().optional(),
-      done: i.boolean().optional(),
-      text: i.string().optional(),
-    }),
+		writing: i.entity({
+			title: i.string(),
+			text: i.string(),
+			postedAt: i.date(),
+		}),
   },
   links: {
     $streams$files: {
@@ -79,11 +73,6 @@ const _schema = i.schema({
         has: "one",
         label: "camera",
       },
-    },
-  },
-  rooms: {
-    todos: {
-      presence: i.entity({}),
     },
   },
 });

@@ -41,6 +41,9 @@ function Header() {
 						<Link href="/dashboard/camera">Camera</Link>
 					</li>
 					<li>
+						<Link href="/dashboard/writing">Writing</Link>
+					</li>
+					<li>
 						<Link href="/dashboard/library">Library</Link>
 					</li>
 				</ul>
