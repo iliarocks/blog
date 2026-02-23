@@ -7,7 +7,12 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { Masonry } from "masonic";
 import { useEffect, useState } from "react";
 
-type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }>;
+type Image = Omit<
+	InstaQLEntity<typeof schema, "camera", { $files: {} }>,
+	"takenAt"
+> & {
+	takenAt: Date;
+};
 
 function Camera() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
@@ -21,7 +26,7 @@ function Camera() {
 	const { camera } = data;
 
 	const sorted = camera.toSorted(
-		(a, b) => Date.parse(b.takenAt) - Date.parse(a.takenAt),
+		(a, b) => b.takenAt.getTime() - a.takenAt.getTime(),
 	);
 
 	return (
@@ -57,7 +62,14 @@ function CameraGrid({
 		);
 	};
 
-	return <Masonry items={images} columnGutter={12} columnWidth={columnWidth} render={render} />;
+	return (
+		<Masonry
+			items={images}
+			columnGutter={12}
+			columnWidth={columnWidth}
+			render={render}
+		/>
+	);
 }
 
 function ImageDialog({
