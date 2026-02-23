@@ -8,7 +8,9 @@ import { id, InstaQLEntity } from "@instantdb/react";
 import { format } from "date-fns";
 import { FormEventHandler, useState } from "react";
 
-type Item = InstaQLEntity<typeof schema, "writing", {}>;
+type Item = Omit<InstaQLEntity<typeof schema, "writing", {}>, "postedAt"> & {
+    postedAt: Date;
+};
 
 function WritingDashboard() {
 	const { isLoading, error, data } = db.useQuery({ writing: {} });
