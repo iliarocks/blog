@@ -9,7 +9,9 @@ import Button from "@/components/Button";
 import FileInput from "@/components/FileInput";
 import TextInput from "@/components/TextInput";
 
-type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }>;
+type Image = Omit<InstaQLEntity<typeof schema, "camera", { $files: {} }>, "takenAt"> & {
+    takenAt: Date;
+};
 
 function CameraDashboard() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
