@@ -20,7 +20,7 @@ function Article({ params }: { params: Promise<{ slug: string }> }) {
 		<article className="flex flex-col gap-m max-w-[70ch] mx-auto mb-xl">
 			<header className="flex justify-between">
 				<h1 className="text-lg">{article.title}</h1>
-				<p className="text-[var(--secondary)]">{format(article.postedAt, "MMMM dd yyyy")}</p>
+				<p className="text-[var(--secondary)] hidden md:block">{format(article.postedAt, "MMMM dd yyyy")}</p>
 			</header>
 			<Markdown>{article.text}</Markdown>
 		</article>
