@@ -7,12 +7,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { Masonry } from "masonic";
 import { useEffect, useState } from "react";
 
-type Image = Omit<
-	InstaQLEntity<typeof schema, "camera", { $files: {} }>,
-	"takenAt"
-> & {
-	takenAt: Date;
-};
+type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }, undefined, true>;
 
 function Camera() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
