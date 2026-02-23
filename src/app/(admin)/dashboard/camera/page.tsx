@@ -14,7 +14,8 @@ type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }, undefined, t
 function CameraDashboard() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
 	const [image, setImage] = useState<File>();
-	const [alt, setAlt] = useState<string>("");
+	const [alt, setAlt] = useState("");
+	const [location, setLocation] = useState("");
 
 	if (isLoading || error) return;
 
@@ -22,7 +23,7 @@ function CameraDashboard() {
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		if (!image || !alt) return;
+		if (!image || !alt || !location) return;
 
 		const exif = await exifr.parse(image);
 		const takenAt = exif.DateTimeOriginal.toISOString();
@@ -30,7 +31,7 @@ function CameraDashboard() {
 		const { data } = await db.storage.uploadFile(path, image);
 
 		await db.transact(
-			db.tx.camera[id()].create({ alt, takenAt }).link({ $files: data.id }),
+			db.tx.camera[id()].create({ alt, takenAt, location }).link({ $files: data.id }),
 		);
 	};
 
@@ -39,6 +40,7 @@ function CameraDashboard() {
 			<form onSubmit={handleSubmit} className="flex flex-col gap-s md:flex-row md:gap-m">
 				<section className="flex max-md:justify-between gap-s items-center grow">
 					<TextInput placeholder="Alt text" value={alt} onUpdate={setAlt} />
+					<TextInput placeholder="Location" value={location} onUpdate={setLocation} />
 					<FileInput
 						label={image?.name}
 						accept="image/*"

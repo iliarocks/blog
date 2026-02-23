@@ -7,7 +7,13 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { Masonry } from "masonic";
 import { useEffect, useState } from "react";
 
-type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }, undefined, true>;
+type Image = InstaQLEntity<
+	typeof schema,
+	"camera",
+	{ $files: {} },
+	undefined,
+	true
+>;
 
 function Camera() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
@@ -51,7 +57,7 @@ function CameraGrid({
 
 	const render = ({ data, index }: { data: Image; index: number }) => {
 		return (
-			<button onClick={() => isDesktop && onSelect(index)}>
+			<button onClick={() => onSelect(index)}>
 				<Image image={data} />
 			</button>
 		);
@@ -99,21 +105,30 @@ function ImageDialog({
 	}, [images, selected]);
 
 	return (
-		<dialog
-			open
-			className="fixed z-1 inset-0 grid place-items-center p-s w-screen bg-[var(--background)]"
+		<div
+			className="fixed inset-0 z-1 flex flex-col items-center justify-center gap-s p-s bg-[var(--background)]"
 			onClick={() => onSelect(null)}
 		>
-			<Image image={images[selected]} />
-		</dialog>
+			<Image image={images[selected]} onClick={(e) => e.stopPropagation()} />
+			<p
+				className="text-[var(--secondary)] shrink-0"
+				onClick={(e) => e.stopPropagation()}
+			>
+				{images[selected].location}
+			</p>
+		</div>
 	);
 }
 
-function Image({ image }: { image: Image }) {
+function Image({
+	image,
+	...props
+}: { image: Image } & React.ComponentPropsWithoutRef<"img">) {
 	const [loaded, setLoaded] = useState(false);
 	return (
 		<img
-			className={`min-h-0 min-w-0 max-h-full max-w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
+			{...props}
+			className={`min-h-0 min-w-0 max-h-full max-w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"} ${props.className ?? ""}`}
 			src={image.$files?.url}
 			alt={image.alt}
 			onLoad={() => setLoaded(true)}

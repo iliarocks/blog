@@ -21,6 +21,7 @@ const _schema = i.schema({
     }),
     camera: i.entity({
       alt: i.string(),
+      location: i.string(),
       takenAt: i.date(),
     }),
     library: i.entity({
@@ -28,11 +29,11 @@ const _schema = i.schema({
       title: i.string(),
       type: i.string(),
     }),
-		writing: i.entity({
-			title: i.string(),
-			text: i.string(),
-			postedAt: i.date(),
-		}),
+    writing: i.entity({
+      postedAt: i.date(),
+      text: i.string(),
+      title: i.string(),
+    }),
   },
   links: {
     $streams$files: {
@@ -66,7 +67,7 @@ const _schema = i.schema({
         on: "camera",
         has: "one",
         label: "$files",
-				onDelete: "cascade",
+        onDelete: "cascade",
       },
       reverse: {
         on: "$files",
@@ -75,6 +76,7 @@ const _schema = i.schema({
       },
     },
   },
+  rooms: {},
 });
 
 // This helps TypeScript display nicer intellisense
