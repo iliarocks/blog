@@ -8,8 +8,15 @@ import exifr from "exifr";
 import Button from "@/components/Button";
 import FileInput from "@/components/FileInput";
 import TextInput from "@/components/TextInput";
+import imageCompression from "browser-image-compression";
 
-type Image = InstaQLEntity<typeof schema, "camera", { $files: {} }, undefined, true>;
+type Image = InstaQLEntity<
+	typeof schema,
+	"camera",
+	{ $files: {} },
+	undefined,
+	true
+>;
 
 function CameraDashboard() {
 	const { isLoading, error, data } = db.useQuery({ camera: { $files: {} } });
@@ -25,29 +32,48 @@ function CameraDashboard() {
 		e.preventDefault();
 		if (!image || !alt || !location) return;
 
+		const compressed = await imageCompression(image, {
+			maxSizeMB: 3,
+			maxWidthOrHeight: 2400,
+			useWebWorker: true,
+			fileType: "image/jpeg",
+			initialQuality: 0.85,
+		});
+
 		const exif = await exifr.parse(image);
 		const takenAt = exif.DateTimeOriginal.toISOString();
 		const path = `camera/${image.name}`;
-		const { data } = await db.storage.uploadFile(path, image);
+		const { data } = await db.storage.uploadFile(path, compressed);
 
 		await db.transact(
-			db.tx.camera[id()].create({ alt, takenAt, location }).link({ $files: data.id }),
+			db.tx.camera[id()]
+				.create({ alt, takenAt, location })
+				.link({ $files: data.id }),
 		);
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="flex flex-col gap-s md:flex-row md:gap-m">
+			<form
+				onSubmit={handleSubmit}
+				className="flex flex-col gap-s md:flex-row md:gap-m"
+			>
 				<section className="flex max-md:justify-between gap-s items-center grow">
 					<TextInput placeholder="Alt text" value={alt} onUpdate={setAlt} />
-					<TextInput placeholder="Location" value={location} onUpdate={setLocation} />
+					<TextInput
+						placeholder="Location"
+						value={location}
+						onUpdate={setLocation}
+					/>
 					<FileInput
 						label={image?.name}
 						accept="image/*"
 						onChange={(e) => setImage(e.currentTarget.files?.[0])}
 					/>
 				</section>
-				<Button type="submit" className="max-md:self-start">Post</Button>
+				<Button type="submit" className="max-md:self-start">
+					Post
+				</Button>
 			</form>
 			<CameraGrid images={camera} />
 		</>
