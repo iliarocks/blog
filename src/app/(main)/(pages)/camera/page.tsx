@@ -5,7 +5,7 @@ import { db } from "@/library/db";
 import { InstaQLEntity } from "@instantdb/react";
 import { useWindowWidth } from "@react-hook/window-size";
 import { Masonry } from "masonic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Image = InstaQLEntity<
 	typeof schema,
@@ -124,16 +124,23 @@ function Image({
 	image,
 	...props
 }: { image: Image } & React.ComponentPropsWithoutRef<"img">) {
-	const [loaded, setLoaded] = useState(false);
-	return (
-		<img
-			{...props}
-			className={`min-h-0 min-w-0 max-h-full max-w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"} ${props.className ?? ""}`}
-			src={image.$files?.url}
-			alt={image.alt}
-			onLoad={() => setLoaded(true)}
-		/>
-	);
+	const ref = useRef<HTMLImageElement>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (ref.current?.complete) setLoaded(true);
+  }, []);
+
+  return (
+    <img
+      {...props}
+      ref={ref}
+      className={`min-h-0 min-w-0 max-h-full max-w-full object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"} ${props.className ?? ""}`}
+      src={image.$files?.url}
+      alt={image.alt}
+      onLoad={() => setLoaded(true)}
+    />
+  );
 }
 
 export default Camera;
