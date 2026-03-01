@@ -8,11 +8,6 @@ const nextConfig: NextConfig = {
 				destination: "/dashboard/camera",
 				permanent: true,
 			},
-			{
-				source: "/",
-				destination: "/camera",
-				permanent: true,
-			},
 		];
 	},
 };
