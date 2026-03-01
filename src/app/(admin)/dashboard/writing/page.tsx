@@ -32,7 +32,7 @@ function WritingDashboard() {
 	}
 
 	return (
-		<div className="grid grid-cols-2 gap-l">
+		<div className="flex flex-col gap-s md:grid md:grid-cols-2 md:gap-l">
 			<form onSubmit={handleSubmit} className="flex flex-col gap-s">
 				<section className="flex justify-between items-center">
 					<TextInput placeholder="Title" value={title} onUpdate={setTitle} />
