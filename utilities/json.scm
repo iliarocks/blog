@@ -1,3 +1,6 @@
+(define (field object name)
+  (cdr (assoc name object)))
+
 (define (read-json-file path)
   (call-with-input-file
     path

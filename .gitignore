@@ -1,1 +1,8 @@
 /public/
+
+/photos/*/*
+/projects/*/*
+/writing/*/*
+!/photos/*/metadata.json
+!/projects/*/metadata.json
+!/writing/*/metadata.json

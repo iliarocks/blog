@@ -1,0 +1,36 @@
+{
+  "title": "Through the fog",
+  "lang": "en",
+  "location": "Japan",
+  "description": "A wet day on the road: a quiet bus stop, a fox at the verge, and deer in the long grass.",
+  "items": [
+    {
+      "file": "bicycle.mp4",
+      "alt": "A bicycle with covered luggage beside a wet road"
+    },
+    {
+      "file": "shed.jpg",
+      "alt": "A small wooden shed stands among broad green leaves beneath a foggy sky."
+    },
+    {
+      "file": "bus-stop.jpg",
+      "alt": "A bus stop and folding chair beside a wet road disappearing into fog."
+    },
+    {
+      "file": "crossroads.jpg",
+      "alt": "A rain-soaked junction leads into fog between dense green shrubs."
+    },
+    {
+      "file": "fox.jpg",
+      "alt": "A fox pauses beside a roadside fence with open grassland beyond."
+    },
+    {
+      "file": "crow.jpg",
+      "alt": "A crow perches on a roadside sign above a fog-filled green valley."
+    },
+    {
+      "file": "deer.mp4",
+      "alt": "Deer in a grassy valley beneath green hills"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Oto",
+  "lang": "en",
+  "description": "An iPhone music player for a folder of DRM-free music. Choose a folder, browse its albums, and play your collection without moving the original files. Oto keeps its library index and playback state on your device.",
+  "website": "https://oto.page/",
+  "source": "https://github.com/iliarocks/oto",
+  "alt": "Oto’s album library with cover art and a compact player at the bottom."
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Across the islands",
+  "lang": "en",
+  "location": "Japan",
+  "description": "A day on the bike between islands in Japan. Photographs from the road, with time to stop and look.",
+  "items": [
+    {
+      "file": "DSCF7917.jpg",
+      "alt": "A cyclist pauses beside a white arch bridge, with green hills beyond."
+    },
+    {
+      "file": "DSCF7853.jpg",
+      "alt": "A quiet coastal road curves beside the water, with a suspension bridge in the distance."
+    },
+    {
+      "file": "DSCF7884.jpg",
+      "alt": "Two orange-rimmed roadside mirrors overlook the water; the upper mirror reflects the photographer."
+    },
+    {
+      "file": "DSCF7893.jpg",
+      "alt": "An orange roadside mirror reflects the photographer and a narrow road surrounded by greenery."
+    },
+    {
+      "file": "DSCF7868.jpg",
+      "alt": "A small sandy beach and rocky shoreline beneath a suspension bridge."
+    },
+    {
+      "file": "DSCF7937.jpg",
+      "alt": "A series of suspension bridge towers recedes across the water, framed by trees and overhead wires."
+    }
+  ]
+}
