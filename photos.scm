@@ -6,8 +6,9 @@
 (define (prepare-gallery directory)
   (define gallery (read-json-file (string-append directory "/metadata.json")))
   (define entries (map (lambda (item)
-                         (append item
-                                 (list (cons "directory" directory))
+                         (append (list (cons "file" (published-filename (field item "file")))
+                                       (assoc "alt" item)
+                                       (cons "directory" directory))
                                  (read-metadata (string-append directory "/" (field item "file")))))
                        (field gallery "items")))
   (list (cons "title" (field gallery "title"))
