@@ -44,7 +44,7 @@
     (lambda (path)
       (define input (string-append directory "/" (file-namestring path)))
       (define output (string-append "public/" input))
-      (define type (pathname-type path))
+      (define type (string-downcase (or (pathname-type path) "")))
       (cond
         ((member type '("jpg" "jpeg" "png"))
          (run-synchronous-subprocess "ffmpeg"
