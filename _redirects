@@ -1,0 +1,2 @@
+/photos/:entry/* https://media.ilia.page/photos/:entry/:splat 302
+/writing/:entry/* https://media.ilia.page/writing/:entry/:splat 302

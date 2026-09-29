@@ -14,14 +14,12 @@
   (define title (field essay "title"))
   (define date (field essay "date"))
   (render-page title (field essay "lang")
-    `(body
-       ,header
-       (main
-         (article (@ (class "essay"))
-                  (header
-                    (h1 ,title)
-                    ,(render-date date))
-                  (div (@ (class "prose")) (raw ,(field essay "html"))))))))
+    `(main
+       (article (@ (class "essay"))
+                (header
+                  (h1 ,title)
+                  ,(render-date date))
+                (div (@ (class "prose")) (raw ,(field essay "html")))))))
 
 (define (render-essay-preview essay)
   (define date (field essay "date"))
@@ -33,7 +31,5 @@
 
 (define (render-writing-index essays)
   (render-page "Writing" "en"
-    `(body
-       ,header
-       (main (@ (class "writing-index"))
-             (ul ,@(map render-essay-preview essays))))))
+    `(main (@ (class "writing-index"))
+           (ul ,@(map render-essay-preview essays)))))

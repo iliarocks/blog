@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+cp .assetsignore _redirects public/
+rclone sync public/ r2:blog \
+  --include '*.jpeg' \
+  --include '*.mov' \
+  --progress
+npx wrangler deploy

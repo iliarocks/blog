@@ -16,17 +16,15 @@
           (if (number? value) (number->string value) value)))
 
       (define (write-attribute attribute)
-        (when (or (null? (cdr attribute)) (cadr attribute))
-          (display " " port)
-          (display (car attribute) port)
-          (unless (null? (cdr attribute))
-            (display "=\"" port)
-            (write-text (cadr attribute))
-            (display "\"" port))))
+        (display " " port)
+        (display (car attribute) port)
+        (unless (null? (cdr attribute))
+          (display "=\"" port)
+          (write-text (cadr attribute))
+          (display "\"" port)))
 
       (define (write-node node)
         (cond
-          ((not node) #f)
           ((and (pair? node) (eq? (car node) 'raw))
            (display (cadr node) port))
           ((pair? node)

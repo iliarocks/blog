@@ -11,7 +11,6 @@
   --spacing-s: 1rem;
   --spacing-m: 2rem;
   --spacing-l: 3rem;
-  --spacing-xl: 6rem;
 
   --font-size-heading: 1.75rem;
   --line-height-heading: 2.25rem;
@@ -51,7 +50,7 @@ body {
   width: 100%;
   max-width: 40rem;
   min-height: 100svh;
-  gap: var(--spacing-l);
+  gap: var(--spacing-m);
   margin-inline: auto;
   padding: var(--spacing-s);
   font-family: system-ui, sans-serif;
@@ -60,10 +59,6 @@ body {
   line-height: var(--line-height-small);
   color: var(--primary);
   background-color: var(--background);
-}
-
-main:not(.home) {
-  padding-bottom: var(--spacing-l);
 }
 
 body > header {
@@ -94,7 +89,7 @@ address {
   font-style: normal;
 }
 
-img:where(:not(.home img)) {
+img, video {
   display: block;
   width: 100%;
   height: auto;
@@ -121,12 +116,6 @@ time {
   position: relative;
 }
 
-.video > video {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .video > button {
   position: absolute;
   bottom: var(--spacing-s);
@@ -146,34 +135,11 @@ time {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-m);
-  margin-block: auto;
-}
-
-.home header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-s);
-}
-
-.home header div {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.home h1 {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
 }
 
 .home p {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-}
-
-.home nav {
-  flex-direction: column;
-  gap: var(--spacing-s);
 }
 
 /* Photo Pages */
@@ -200,9 +166,7 @@ time {
 }
 
 .gallery-preview h2 {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-small);
+  font: inherit;
 }
 
 .gallery-preview:hover h2 {
@@ -233,41 +197,9 @@ time {
   gap: var(--spacing-s);
 }
 
-/* Projects Page */
-
-.projects-index {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-l);
-}
-
-.projects-index article {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-s);
-}
-
-.projects-index h2 {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  font-weight: var(--font-weight-medium);
-}
-
-.projects-index figure {
-  height: 26rem;
-  padding: var(--spacing-m);
-  background-color: var(--tertiary);
-}
-
-.projects-index img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 /* Writing Pages */
 
-.writing-index, .essay {
+.essay {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-m);

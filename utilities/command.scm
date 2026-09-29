@@ -1,3 +1,8 @@
+(define (run-command program arguments)
+  (let ((status (run-synchronous-subprocess program arguments)))
+    (unless (zero? status)
+      (error "Command failed" program arguments status))))
+
 (define (command-output program arguments)
   (let* ((output (open-output-string))
          (status (run-synchronous-subprocess program arguments

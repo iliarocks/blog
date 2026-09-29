@@ -1,9 +1,8 @@
 /public/
+/.wrangler/
 .DS_Store
 
 /photos/*/*
-/projects/*/*
 /writing/*/*
 !/photos/*/metadata.json
-!/projects/*/metadata.json
 !/writing/*/metadata.json

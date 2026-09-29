@@ -1,15 +1,11 @@
-(define navigation
-  '(nav
-     (a (@ (href "/photos/index.html")) "Photos")
-     (a (@ (href "/writing/index.html")) "Writing")
-     (a (@ (href "/projects/index.html")) "Projects")))
-
 (define header
-  `(header (@ (lang "en"))
+  '(header (@ (lang "en"))
      (a (@ (href "/index.html")) "Ilia Parunashvili")
-     ,navigation))
+     (nav
+       (a (@ (href "/photos/index.html")) "Photos")
+       (a (@ (href "/writing/index.html")) "Writing"))))
 
-(define (render-page title language body)
+(define (render-page title language content)
   `(html (@ (lang ,language))
          (head
            (meta (@ (charset "utf-8")))
@@ -18,7 +14,9 @@
            (title ,title)
            (link (@ (rel "stylesheet") (href "/style.css")))
            (script (@ (src "/video.js") (defer))))
-         ,body))
+         (body
+           ,header
+           ,content)))
 
 (define (render-date date)
   `(time (@ (datetime ,date) (lang "en"))
