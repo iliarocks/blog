@@ -142,6 +142,13 @@ time {
   line-height: var(--line-height-body);
 }
 
+.home .status {
+  font-size: var(--font-size-small);
+  font-style: italic;
+  line-height: var(--line-height-small);
+  color: var(--secondary);
+}
+
 /* Photo Pages */
 
 .photos-index ul {
